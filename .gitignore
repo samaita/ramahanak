@@ -1,0 +1,14 @@
+public/
+resources/
+.hugo_build.lock
+/data/
+/plan/
+*.md
+!docs/
+!docs/superpowers/
+!docs/superpowers/specs/
+!docs/superpowers/specs/*.md
+!docs/superpowers/plans/
+!docs/superpowers/plans/*.md
+.codex
+!README.md

@@ -1,0 +1,6 @@
+baseURL = "https://ramahanak.com/"
+languageCode = "id-id"
+title = "RamahAnak"
+enableRobotsTXT = true
+disableKinds = ["taxonomy", "term", "rss"]
+ignoreFiles = ["^content/blog/.*"]

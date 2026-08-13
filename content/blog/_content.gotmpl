@@ -1,0 +1,14 @@
+{{ range $name, $article := site.Data.articles }}
+  {{ $date := time.AsTime $article.date_created }}
+  {{ $path := printf "%s/%s/%s" (dateFormat "2006" $date) (dateFormat "01" $date) $article.slug }}
+  {{ $.AddPage (dict
+    "path" $path
+    "title" $article.title
+    "date" $date
+    "outputs" (slice)
+    "build" (dict "list" "never" "render" "never")
+    "sitemap" (dict "disable" true)
+    "params" $article
+    "content" (dict "mediaType" "text/markdown" "value" "")
+  ) }}
+{{ end }}

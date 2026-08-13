@@ -1,0 +1,635 @@
+{{ define "meta" }}
+  <title>{{ .Title }} | {{ site.Title }}</title>
+  <meta name="description" content="{{ .Params.seo.description }}">
+  <meta property="og:title" content="{{ .Title }}">
+  <meta property="og:description" content="{{ .Params.seo.og_description | default .Params.seo.description }}">
+{{ end }}
+
+{{ define "fonts" }}
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,700&display=swap" rel="stylesheet">
+{{ end }}
+
+{{ define "styles" }}
+  :root {
+    color-scheme: light only;
+    --paper: #f0ece4;
+    --paper-lift: #f7f4ef;
+    --paper-dark: #e8e3d9;
+    --ink: #1a1815;
+    --ink-2: #3d3a35;
+    --ink-3: #6b6760;
+    --forest: #2d5a3d;
+    --forest-mid: #4a7c5e;
+    --forest-pale: #e6f0e9;
+    --amber: #c4782a;
+    --amber-pale: #f5e9d8;
+    --border: #d0cab8;
+    --shadow-soft: 0 18px 40px rgba(26, 24, 21, 0.08);
+    --font-head: "Fraunces", ui-serif, serif;
+    --font-body: "DM Sans", ui-sans-serif, sans-serif;
+    --page-width: 960px;
+    --mast-height: 72px;
+  }
+  * { box-sizing: border-box; }
+  *::before,
+  *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+  html { scroll-padding-top: 36px; }
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    color: var(--ink);
+    background: var(--paper);
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.68' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    -webkit-font-smoothing: antialiased;
+  }
+  body::before,
+  body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: max(0px, calc((100vw - var(--page-width)) / 2));
+    background: var(--paper-dark);
+    opacity: 0.55;
+    pointer-events: none;
+    z-index: -1;
+  }
+  body::before { left: 0; }
+  body::after { right: 0; }
+  a { color: inherit; text-decoration: none; }
+  .mast {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    background: rgba(240, 236, 228, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .mast__inner,
+  .shell {
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .mast__inner {
+    min-height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: max(env(safe-area-inset-top), 16px);
+    padding-bottom: 16px;
+  }
+  .mast__title {
+    margin: 0;
+    font-family: var(--font-head);
+    font-size: 18px;
+    line-height: 1.1;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .mast__tag {
+    margin: 4px 0 0;
+    font-size: 12px;
+    line-height: 1.4;
+    color: var(--ink-3);
+  }
+  .mast__brand-link {
+    display: inline-flex;
+    flex-direction: column;
+  }
+  .mast__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .mast__burger {
+    display: none;
+    position: relative;
+  }
+  .mast__burger-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    background: var(--paper-lift);
+    color: var(--ink);
+    cursor: pointer;
+    list-style: none;
+  }
+  .mast__burger-toggle::-webkit-details-marker {
+    display: none;
+  }
+  .mast__burger-icon {
+    position: relative;
+    display: block;
+    width: 18px;
+    height: 12px;
+  }
+  .mast__burger-icon::before,
+  .mast__burger-icon::after,
+  .mast__burger-icon span {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 18px;
+    height: 2px;
+    border-radius: 999px;
+    background: currentColor;
+    transition: transform 0.18s ease, opacity 0.18s ease, top 0.18s ease;
+  }
+  .mast__burger-icon::before { top: 0; }
+  .mast__burger-icon span { top: 5px; }
+  .mast__burger-icon::after { top: 10px; }
+  .mast__burger[open] .mast__burger-icon::before {
+    top: 5px;
+    transform: rotate(45deg);
+  }
+  .mast__burger[open] .mast__burger-icon span {
+    opacity: 0;
+  }
+  .mast__burger[open] .mast__burger-icon::after {
+    top: 5px;
+    transform: rotate(-45deg);
+  }
+  .mast__burger-panel {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    min-width: 220px;
+    padding: 10px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: rgba(247, 244, 239, 0.98);
+    box-shadow: var(--shadow-soft);
+    display: grid;
+    gap: 6px;
+  }
+  .mast__burger-link {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    color: var(--ink-3);
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  .mast__burger-link:hover,
+  .mast__burger-link:focus-visible {
+    background: var(--forest-pale);
+    color: var(--forest);
+  }
+  .mast__mobile-cta {
+    display: none !important;
+    flex: 0 0 auto;
+  }
+  .mast__nav-link,
+  .pill-link,
+  .primary,
+  .secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 10px 16px;
+    border-radius: 4px;
+    font-size: 13px;
+    line-height: 1.4;
+    font-weight: 700;
+    transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+  }
+  .mast__nav-link {
+    color: var(--ink-3);
+  }
+  .pill-link,
+  .primary {
+    background: var(--forest);
+    color: #fff;
+    border: 1px solid var(--forest);
+  }
+  .secondary {
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: var(--paper);
+  }
+  .mast__nav-link:hover,
+  .mast__nav-link:focus-visible,
+  .pill-link:hover,
+  .pill-link:focus-visible,
+  .primary:hover,
+  .primary:focus-visible,
+  .secondary:hover,
+  .secondary:focus-visible {
+    transform: translateY(-1px);
+  }
+  .mast__nav-link:hover,
+  .mast__nav-link:focus-visible {
+    color: var(--ink);
+  }
+  .pill-link:hover,
+  .pill-link:focus-visible,
+  .primary:hover,
+  .primary:focus-visible {
+    background: var(--forest-mid);
+    border-color: var(--forest-mid);
+  }
+  .shell { padding-top: 56px; padding-bottom: 96px; }
+  .eyebrow,
+  .meta-chip,
+  .section-label {
+    font-size: 12px;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+  .eyebrow,
+  .section-label {
+    color: var(--forest);
+    font-weight: 600;
+  }
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.8fr);
+    gap: 28px;
+    align-items: end;
+    padding-bottom: 44px;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero__kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: var(--amber-pale);
+    color: var(--amber);
+  }
+  .hero__title {
+    margin: 0 0 16px;
+    font-family: var(--font-head);
+    font-size: clamp(44px, 7vw, 76px);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+    font-weight: 900;
+    color: var(--ink);
+    max-width: 900px;
+  }
+  .hero__lead {
+    margin: 0;
+    max-width: 760px;
+    font-size: 19px;
+    line-height: 1.5;
+    color: var(--ink-2);
+  }
+  .hero__meta {
+    display: grid;
+    gap: 12px;
+  }
+  .meta-panel,
+  .toc__card,
+  .section-block,
+  .note-card,
+  .cta-strip {
+    border-radius: 12px;
+  }
+  .meta-panel,
+  .note-card {
+    padding: 16px;
+    background: var(--paper-lift);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-soft);
+  }
+  .meta-panel--dark {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+  .meta-cluster {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .meta-chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: var(--paper-dark);
+    color: var(--ink-2);
+  }
+  .content-layout {
+    display: grid;
+    grid-template-columns: minmax(220px, 0.4fr) minmax(0, 1fr);
+    gap: 24px;
+    margin-top: 32px;
+  }
+  .toc__card,
+  .section-block,
+  .cta-strip {
+    padding: 20px;
+    background: var(--paper-lift);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-soft);
+  }
+  .toc {
+    align-self: start;
+    position: sticky;
+    top: 96px;
+    height: fit-content;
+  }
+  .section-block--primary {
+    background:
+      linear-gradient(180deg, rgba(230, 240, 233, 0.95) 0%, rgba(247, 244, 239, 0.9) 140px),
+      var(--paper-lift);
+    border: 1px solid rgba(74, 124, 94, 0.32);
+  }
+  .section-block,
+  .cta-strip {
+    scroll-margin-top: 36px;
+  }
+  .toc__list,
+  .bullet-list,
+  .number-list {
+    margin: 12px 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 10px;
+    line-height: 1.6;
+  }
+  .toc__link {
+    display: block;
+    padding: 8px 0;
+    border-bottom: 1px solid transparent;
+    font-size: 14px;
+    line-height: 1.4;
+    color: var(--ink-3);
+  }
+  .toc__link:hover,
+  .toc__link:focus-visible {
+    color: var(--ink);
+    border-color: var(--border);
+    outline: none;
+  }
+  .article-flow {
+    display: grid;
+    gap: 16px;
+  }
+  .section-title {
+    margin: 8px 0 14px;
+    color: var(--ink);
+    font-family: var(--font-head);
+    font-size: clamp(31px, 4vw, 44px);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+  }
+  .body-copy,
+  .note-card__copy,
+  .cta-strip__copy,
+  .meta-panel__copy {
+    margin: 0 0 14px;
+    color: var(--ink-2);
+    line-height: 1.72;
+  }
+  .number-list {
+    counter-reset: note-step;
+  }
+  .number-list li,
+  .bullet-list li {
+    display: grid;
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: 10px;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--ink-2);
+  }
+  .number-list li::before {
+    counter-increment: note-step;
+    content: "0" counter(note-step);
+    color: var(--forest);
+    font-size: 12px;
+    line-height: 1.4;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+  }
+  .bullet-list li::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    margin-top: 8px;
+    margin-left: 12px;
+    border-radius: 50%;
+    background: var(--amber);
+  }
+  .quote {
+    margin: 16px 0 0;
+    padding: 18px 20px;
+    border-left: 3px solid var(--amber);
+    background: rgba(245, 233, 216, 0.72);
+    color: var(--ink);
+    font-family: var(--font-head);
+    font-size: 22px;
+    line-height: 1.45;
+  }
+  .cta-strip,
+  .cta-strip__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .cta-strip {
+    background: var(--ink);
+    color: var(--paper);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .cta-strip__copy {
+    max-width: 720px;
+    margin-bottom: 0;
+  }
+  .cta-strip .primary {
+    background: var(--paper);
+    color: var(--forest);
+    border-color: var(--paper);
+  }
+  @media (max-width: 900px) {
+    .hero,
+    .content-layout {
+      grid-template-columns: 1fr;
+    }
+    .toc {
+      position: static;
+      height: auto;
+    }
+  }
+  @media (max-width: 720px) {
+    .mast__nav {
+      display: none;
+    }
+    .mast__burger,
+    .mast__mobile-cta {
+      display: inline-flex !important;
+    }
+    .mast__inner {
+      align-items: center;
+      gap: 10px;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+    .mast__brand-link {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+    .mast__title {
+      font-size: 15px;
+    }
+    .mast__tag {
+      font-size: 11px;
+      line-height: 1.25;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .mast__mobile-cta {
+      min-height: 40px;
+      padding: 9px 14px;
+      white-space: nowrap;
+    }
+    .cta-strip {
+      flex-direction: column;
+      align-items: start;
+    }
+  }
+{{ end }}
+
+{{ define "main" }}
+  {{ $navLinks := where .Params.masthead.nav "class" "mast__nav-link" }}
+  {{ $ctaLinks := where .Params.masthead.nav "class" "pill-link" }}
+  <header class="mast">
+    <div class="mast__inner">
+      <details class="mast__burger">
+        <summary class="mast__burger-toggle" aria-label="Open menu">
+          <span class="mast__burger-icon"><span></span></span>
+        </summary>
+        <div class="mast__burger-panel">
+          {{ range $navLinks }}
+            <a class="mast__burger-link" href="{{ .href }}">{{ .label }}</a>
+          {{ end }}
+        </div>
+      </details>
+      <a class="mast__brand-link" href="/">
+        <p class="mast__title">{{ .Params.masthead.title }}</p>
+        <p class="mast__tag">{{ .Params.masthead.tagline }}</p>
+      </a>
+      <nav class="mast__nav" aria-label="Navigasi artikel">
+        {{ range .Params.masthead.nav }}
+          <a class="{{ .class }}" href="{{ .href }}">{{ .label }}</a>
+        {{ end }}
+      </nav>
+      {{ range $ctaLinks }}
+        <a class="{{ .class }} mast__mobile-cta" href="{{ .href }}">{{ .label }}</a>
+      {{ end }}
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <div>
+        <div class="hero__kicker">
+          <span class="eyebrow" style="color:inherit;">{{ .Params.category }}</span>
+        </div>
+        <h1 class="hero__title">{{ .Title }}</h1>
+        <p class="hero__lead">{{ .Params.hero_lead }}</p>
+      </div>
+
+      <aside class="hero__meta" aria-label="Metadata artikel">
+        <div class="meta-panel">
+          <p class="section-label">{{ .Params.metadata.label }}</p>
+          <div class="meta-cluster">
+            <span class="meta-chip">{{ .Params.date_display }}</span>
+            <span class="meta-chip">{{ .Params.read_time }}</span>
+            {{ range .Params.metadata.chips }}
+              <span class="meta-chip">{{ . }}</span>
+            {{ end }}
+          </div>
+        </div>
+        <div class="meta-panel meta-panel--dark">
+          <p class="section-label" style="color:rgba(255,255,255,0.72);">{{ .Params.quick_summary.label }}</p>
+          <p class="meta-panel__copy" style="color:rgba(255,255,255,0.88); margin-bottom:0;">{{ .Params.quick_summary.text }}</p>
+        </div>
+      </aside>
+    </section>
+
+    <div class="content-layout">
+      <aside class="toc" aria-label="Daftar isi artikel">
+        <div class="toc__card">
+          <p class="section-label">{{ .Params.toc_label }}</p>
+          <ul class="toc__list">
+            {{ range .Params.sections }}
+              <li><a class="toc__link" href="#{{ .id }}">{{ .toc_title | default .heading }}</a></li>
+            {{ end }}
+            <li><a class="toc__link" href="#akhir">{{ .Params.cta_section.anchor_label }}</a></li>
+          </ul>
+        </div>
+      </aside>
+
+      <article class="article-flow">
+        {{ range $index, $section := .Params.sections }}
+          <section id="{{ $section.id }}" class="section-block{{ if eq $index 0 }} section-block--primary{{ end }}">
+            <p class="section-label">{{ $section.label }}</p>
+            <h2 class="section-title">{{ $section.heading }}</h2>
+            {{ range $section.paragraphs }}
+              <p class="body-copy">{{ . }}</p>
+            {{ end }}
+            {{ with $section.quote }}
+              <blockquote class="quote">{{ . }}</blockquote>
+            {{ end }}
+            {{ with $section.ordered_list }}
+              <ol class="number-list">
+                {{ range . }}
+                  <li>{{ . }}</li>
+                {{ end }}
+              </ol>
+            {{ end }}
+            {{ with $section.bullet_list }}
+              <ul class="bullet-list">
+                {{ range . }}
+                  <li>{{ . }}</li>
+                {{ end }}
+              </ul>
+            {{ end }}
+            {{ with $section.note }}
+              <div class="note-card" style="margin-top:14px;">
+                <p class="section-label">{{ .label }}</p>
+                <p class="note-card__copy" style="margin-bottom:0;">{{ .text }}</p>
+              </div>
+            {{ end }}
+          </section>
+        {{ end }}
+
+        <section id="akhir" class="cta-strip" aria-label="Langkah berikutnya">
+          <p class="cta-strip__copy">{{ .Params.cta_section.copy }}</p>
+          <div class="cta-strip__actions">
+            {{ range .Params.cta_section.actions }}
+              <a class="{{ .class }}" href="{{ .href }}">{{ .label }}</a>
+            {{ end }}
+          </div>
+        </section>
+      </article>
+    </div>
+  </main>
+{{ end }}

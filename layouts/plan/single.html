@@ -1,0 +1,807 @@
+{{ define "meta" }}
+  <title>{{ .Title }}</title>
+  {{ with .Params.seo.description }}<meta name="description" content="{{ . }}">{{ end }}
+  <meta name="robots" content="noindex, nofollow">
+{{ end }}
+
+{{ define "fonts" }}
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,700&display=swap" rel="stylesheet">
+{{ end }}
+
+{{ define "styles" }}
+  :root {
+    color-scheme: light only;
+    --paper: #f0ece4;
+    --paper-lift: #f7f4ef;
+    --paper-dark: #e8e3d9;
+    --ink: #1a1815;
+    --ink-2: #3d3a35;
+    --ink-3: #6b6760;
+    --forest: #2d5a3d;
+    --forest-mid: #4a7c5e;
+    --forest-pale: #e6f0e9;
+    --amber: #c4782a;
+    --amber-pale: #f5e9d8;
+    --gold-strong: #8e5a00;
+    --gold: #c99510;
+    --gold-pale: #fff4cc;
+    --border: #d0cab8;
+    --shadow-soft: 0 18px 40px rgba(26, 24, 21, 0.08);
+    --font-head: "Fraunces", ui-serif, serif;
+    --font-body: "DM Sans", ui-sans-serif, sans-serif;
+    --page-width: 960px;
+    --mast-height: 72px;
+  }
+
+  * { box-sizing: border-box; }
+  *::before,
+  *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    color: var(--ink);
+    background: var(--paper);
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.68' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    -webkit-font-smoothing: antialiased;
+  }
+  body::before,
+  body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: max(0px, calc((100vw - var(--page-width)) / 2));
+    background: var(--paper-dark);
+    opacity: 0.55;
+    pointer-events: none;
+    z-index: -1;
+  }
+  body::before { left: 0; }
+  body::after { right: 0; }
+
+  a { color: inherit; text-decoration: none; }
+
+  .shell {
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: 0 24px 96px;
+  }
+
+  .eyebrow {
+    font-size: 12px;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--forest);
+    font-weight: 600;
+  }
+
+  .mast {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    background: rgba(240, 236, 228, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .mast__inner {
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: max(env(safe-area-inset-top), 16px) 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .mast__brand {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .mast__brand-link {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .mast__title {
+    font-family: var(--font-head);
+    font-size: 18px;
+    line-height: 1.12;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .mast__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: var(--amber-pale);
+    color: var(--amber);
+    font-size: 12px;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .mast__status::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--amber);
+  }
+
+  .hero {
+    padding: 56px 0 48px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.95fr);
+    gap: 32px;
+    align-items: end;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero__title {
+    margin: 16px 0 20px;
+    font-family: var(--font-head);
+    font-size: clamp(54px, 8vw, 88px);
+    line-height: 0.96;
+    letter-spacing: -0.05em;
+    font-weight: 900;
+    color: var(--ink);
+  }
+  .hero__lead {
+    margin: 0 0 16px;
+    max-width: 700px;
+    font-size: 20px;
+    line-height: 1.55;
+    letter-spacing: -0.01em;
+    color: var(--ink-2);
+  }
+  .hero__body {
+    margin: 0;
+    max-width: 660px;
+    font-size: 16px;
+    line-height: 1.68;
+    color: var(--ink-3);
+  }
+  .hero__aside {
+    display: grid;
+    gap: 12px;
+  }
+  .hero-card {
+    padding: 18px;
+    border-radius: 12px;
+    background: var(--paper-lift);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-soft);
+  }
+  .hero-card--dark {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+  .hero-card__label {
+    margin: 0 0 8px;
+    font-size: 12px;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.72;
+  }
+  .hero-card__text {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.45;
+    font-weight: 700;
+  }
+
+  .content-layout {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+  }
+  .content-layout main {
+    margin-top: 20px;
+  }
+  .toc {
+    position: sticky;
+    top: calc(var(--mast-height) + 16px);
+    margin-top: 20px;
+  }
+  .toc__card {
+    padding: 16px;
+    border-radius: 12px;
+    background: var(--paper-lift);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-soft);
+  }
+  .toc__list {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0 0;
+    display: grid;
+    gap: 4px;
+  }
+  .toc__link {
+    display: block;
+    padding: 8px 0;
+    font-size: 14px;
+    line-height: 1.4;
+    color: var(--ink-3);
+    border-bottom: 1px solid transparent;
+  }
+  .toc__link:hover,
+  .toc__link:focus-visible {
+    color: var(--ink);
+    border-color: var(--border);
+    outline: none;
+  }
+
+  .section-block {
+    scroll-margin-top: calc(var(--mast-height) + 24px);
+    margin-bottom: 12px;
+    padding: 20px;
+    border-radius: 12px;
+    background: var(--paper-lift);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-soft);
+  }
+  .section-block--primary {
+    background:
+      linear-gradient(180deg, rgba(45, 90, 61, 0.98) 0%, rgba(28, 56, 37, 0.98) 100%);
+    border: 1px solid rgba(45, 90, 61, 0.54);
+  }
+  .section-block--fallback {
+    background:
+      linear-gradient(180deg, rgba(255, 249, 226, 0.98) 0%, rgba(245, 207, 82, 0.42) 140px),
+      var(--paper-lift);
+    border: 1px solid rgba(201, 149, 16, 0.28);
+  }
+  .section-block__title {
+    margin: 0 0 10px;
+    font-size: 12px;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--forest);
+    font-weight: 600;
+  }
+  .section-block--primary .section-block__title {
+    color: rgba(255, 255, 255, 0.82);
+  }
+  .section-block--fallback .section-block__title {
+    color: var(--gold-strong);
+  }
+  .section-block--primary .plan-card__venue,
+  .section-block--primary .timeline__value {
+    color: #fff;
+  }
+  .section-block--primary .plan-card__area,
+  .section-block--primary .plan-card__body,
+  .section-block--primary .detail-list li,
+  .section-block--primary .fallback-card__index {
+    color: rgba(245, 233, 216, 0.84);
+  }
+  .section-block--primary .detail-list li::before {
+    background: rgba(245, 233, 216, 0.82);
+  }
+  .section-block--primary .timeline__cell {
+    background: rgba(247, 244, 239, 0.14);
+    border-color: rgba(255, 255, 255, 0.14);
+  }
+  .section-block--primary .timeline__label {
+    color: rgba(245, 233, 216, 0.74);
+  }
+
+  .plan-card__top {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+  .plan-card__venue {
+    margin: 0 0 4px;
+    font-family: var(--font-head);
+    font-size: 24px;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .plan-card__area {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.4;
+    color: var(--ink-3);
+  }
+  .plan-card__body {
+    margin: 0 0 16px;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--ink-2);
+  }
+  .maps-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 42px;
+    height: 42px;
+    border-radius: 4px;
+    background: var(--forest);
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .maps-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+  .maps-btn--light {
+    background: rgba(247, 244, 239, 0.96);
+    color: var(--forest);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+  }
+
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .timeline__cell {
+    padding: 12px;
+    border-radius: 8px;
+    background: var(--paper);
+    border: 1px solid var(--border);
+  }
+  .timeline__label {
+    margin: 0 0 4px;
+    font-size: 12px;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--forest);
+    font-weight: 600;
+  }
+  .timeline__value {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.35;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .fallback-grid {
+    display: grid;
+    gap: 12px;
+  }
+  .risk-grid {
+    display: grid;
+    gap: 12px;
+  }
+  .risk-card {
+    padding: 16px;
+    border-radius: 12px;
+    background: rgba(247, 244, 239, 0.96);
+    border: 1px solid rgba(107, 103, 96, 0.14);
+  }
+  .risk-card__label {
+    margin: 0 0 8px;
+    font-size: 12px;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--forest);
+    font-weight: 700;
+  }
+  .risk-card__text {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink-2);
+  }
+  .fallback-card {
+    padding: 16px;
+    border-radius: 12px;
+    background: var(--paper);
+    border: 1px solid var(--border);
+  }
+  .fallback-card__index {
+    margin: 0 0 8px;
+    font-size: 12px;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--amber);
+    font-weight: 600;
+  }
+
+  .detail-list,
+  .footer__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 10px;
+  }
+  .detail-list li {
+    display: grid;
+    grid-template-columns: 12px minmax(0, 1fr);
+    gap: 10px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink-2);
+  }
+  .detail-list li::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    margin-top: 8px;
+    border-radius: 50%;
+    background: var(--amber);
+  }
+  .detail-list strong {
+    color: var(--ink);
+  }
+
+  .footer {
+    margin-top: 80px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: 24px;
+  }
+  .footer__value {
+    margin: 10px 0 0;
+    font-size: 16px;
+    line-height: 1.4;
+    color: var(--ink);
+  }
+  .footer__list li {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink-3);
+  }
+
+  @media (max-width: 1024px) {
+    .hero,
+    .content-layout,
+    .footer {
+      grid-template-columns: 1fr;
+    }
+
+    .toc {
+      position: static;
+      margin-top: 32px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .shell,
+    .mast__inner {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .hero {
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
+
+    .hero__title {
+      font-size: 48px;
+    }
+
+    .timeline {
+      grid-template-columns: 1fr;
+    }
+
+    .mast__inner {
+      align-items: center;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+{{ end }}
+
+  {{ define "main" }}
+  {{ $page := .Params }}
+  {{ $hasFallbacks := or $page.fallbacks.nearby (or $page.fallbacks.weather (or $page.fallbacks.overcrowded $page.fallback_culinary)) }}
+  {{ $hasExecution := $page.execution_details }}
+  {{ $hasRisk := and $page.risk $page.risk.items }}
+
+  <header class="mast">
+    <div class="mast__inner">
+      <div class="mast__brand">
+        <a class="mast__brand-link" href="/">
+          <span class="eyebrow">{{ $page.masthead.brand }}</span>
+          <strong class="mast__title">{{ $page.masthead.title }}</strong>
+        </a>
+      </div>
+      <div class="mast__status">{{ $page.masthead.status }}</div>
+    </div>
+  </header>
+
+  <div class="shell">
+    <section class="hero">
+      <div>
+        {{ with $page.summary.eyebrow }}
+          <span class="eyebrow">{{ . }}</span>
+        {{ end }}
+        <h1 class="hero__title">{{ .Title }}</h1>
+        {{ with $page.summary.title }}
+          <p class="hero__lead">{{ . }}</p>
+        {{ end }}
+        {{ with $page.summary.copy }}
+          <p class="hero__body">{{ . }}</p>
+        {{ end }}
+      </div>
+
+      <div class="hero__aside">
+        <section class="hero-card hero-card--dark">
+          <p class="hero-card__label">Pilihan hari ini</p>
+          <p class="hero-card__text">{{ $page.decision_outcome.label }}</p>
+        </section>
+      </div>
+    </section>
+
+    <div class="content-layout">
+      <aside class="toc">
+        <section class="toc__card">
+          <span class="eyebrow">{{ $page.toc.label }}</span>
+          <ul class="toc__list">
+            <li><a class="toc__link" href="#section-master">{{ or $page.labels.main_plan_label "Plan utama" }}</a></li>
+            {{ if $hasExecution }}
+              <li><a class="toc__link" href="#section-execution">{{ or $page.labels.execution_details_title "Detail pelaksanaan" }}</a></li>
+            {{ end }}
+            {{ if $hasRisk }}
+              <li><a class="toc__link" href="#section-risk">{{ or $page.risk.title "Hal yang perlu dijaga" }}</a></li>
+            {{ end }}
+            {{ if $hasFallbacks }}
+              <li><a class="toc__link" href="#section-fallback">{{ or $page.labels.fallback_label "Rencana antisipasi" }}</a></li>
+            {{ end }}
+          </ul>
+        </section>
+      </aside>
+
+      <main>
+        {{ with $page.main_recommendation }}
+          <article class="section-block section-block--primary" id="section-master">
+            <h2 class="section-block__title">{{ or $page.labels.main_plan_label "Plan utama" }}</h2>
+            <div class="plan-card__top">
+              <div>
+                <h3 class="plan-card__venue">{{ .title }}</h3>
+                {{ with .area_cluster }}
+                  <p class="plan-card__area">{{ . }}</p>
+                {{ end }}
+              </div>
+              {{ with .maps_url }}
+                <a class="maps-btn maps-btn--light" href="{{ . }}" target="_blank" rel="noreferrer" aria-label="{{ or $page.labels.maps_cta "Buka Google Maps" }}">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 21s-6-4.35-6-10a6 6 0 1 1 12 0c0 5.65-6 10-6 10Z"></path>
+                    <circle cx="12" cy="11" r="2.5"></circle>
+                  </svg>
+                </a>
+              {{ end }}
+            </div>
+            {{ with .identity }}
+              <p class="plan-card__body">{{ . }}</p>
+            {{ end }}
+            {{ with .execution }}
+              <div class="timeline">
+                {{ with .arrival }}
+                  <div class="timeline__cell">
+                    <p class="timeline__label">Datang</p>
+                    <p class="timeline__value">{{ . }}</p>
+                  </div>
+                {{ end }}
+                {{ with .exit_window }}
+                  <div class="timeline__cell">
+                    <p class="timeline__label">{{ or $page.labels.execution_label "Mulai pulang" }}</p>
+                    <p class="timeline__value">{{ . }}</p>
+                  </div>
+                {{ end }}
+                {{ with .degradation }}
+                  <div class="timeline__cell">
+                    <p class="timeline__label">Kalau terlalu siang</p>
+                    <p class="timeline__value">{{ . }}</p>
+                  </div>
+                {{ end }}
+              </div>
+            {{ end }}
+            {{ with .why_it_works }}
+              <ul class="detail-list">
+                {{ range . }}
+                  <li>{{ . }}</li>
+                {{ end }}
+              </ul>
+            {{ end }}
+          </article>
+        {{ end }}
+
+        {{ with $page.execution_details }}
+          <section class="section-block" id="section-execution">
+            <h2 class="section-block__title">{{ or $page.labels.execution_details_title "Detail pelaksanaan" }}</h2>
+            <ul class="detail-list">
+              {{ with .parking }}<li><span><strong>Parkir:</strong> {{ . }}</span></li>{{ end }}
+              {{ with .toilet }}<li><span><strong>Toilet:</strong> {{ . }}</span></li>{{ end }}
+              {{ with .prayer }}<li><span><strong>Ibadah:</strong> {{ . }}</span></li>{{ end }}
+              {{ with .kids_activity }}<li><span><strong>Aktivitas anak:</strong> {{ . }}</span></li>{{ end }}
+              {{ with .cutoff }}<li><span><strong>Batas pulang:</strong> {{ . }}</span></li>{{ end }}
+            </ul>
+          </section>
+        {{ end }}
+
+        {{ with $page.risk }}
+          {{ with .items }}
+            <section class="section-block" id="section-risk">
+              <h2 class="section-block__title">{{ or $page.risk.title "Hal yang perlu dijaga" }}</h2>
+              <div class="risk-grid">
+                {{ range . }}
+                  <article class="risk-card">
+                    <p class="risk-card__label">{{ .label }}</p>
+                    <p class="risk-card__text">{{ .text }}</p>
+                  </article>
+                {{ end }}
+              </div>
+            </section>
+          {{ end }}
+        {{ end }}
+
+        {{ if $hasFallbacks }}
+          <article class="section-block section-block--fallback" id="section-fallback">
+            <h2 class="section-block__title">{{ or $page.labels.fallback_label "Rencana antisipasi" }}</h2>
+            <div class="fallback-grid">
+              {{ with $page.fallbacks.nearby }}
+                <section class="fallback-card">
+                  <p class="fallback-card__index">Pilihan terdekat</p>
+                  <div class="plan-card__top">
+                    <div>
+                      <h3 class="plan-card__venue">{{ .title }}</h3>
+                      {{ with .distance_note }}
+                        <p class="plan-card__area">{{ . }}</p>
+                      {{ end }}
+                    </div>
+                    {{ with .maps_url }}
+                      <a class="maps-btn" href="{{ . }}" target="_blank" rel="noreferrer" aria-label="{{ or $page.labels.fallback_maps_cta "Buka Maps" }}">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <path d="M12 21s-6-4.35-6-10a6 6 0 1 1 12 0c0 5.65-6 10-6 10Z"></path>
+                          <circle cx="12" cy="11" r="2.5"></circle>
+                        </svg>
+                      </a>
+                    {{ end }}
+                  </div>
+                  {{ with .reason }}
+                    <p class="plan-card__body">{{ . }}</p>
+                  {{ end }}
+                  <ul class="detail-list">
+                    {{ with .trigger }}<li><span><strong>Pakai kalau:</strong> {{ . }}</span></li>{{ end }}
+                    {{ with .travel_time }}<li><span><strong>Waktu tempuh:</strong> {{ . }}</span></li>{{ end }}
+                  </ul>
+                </section>
+              {{ end }}
+
+              {{ with $page.fallbacks.weather }}
+                <section class="fallback-card">
+                  <p class="fallback-card__index">Cuaca Berubah</p>
+                  <div class="plan-card__top">
+                    <div>
+                      <h3 class="plan-card__venue">{{ .title }}</h3>
+                      {{ with .distance_note }}
+                        <p class="plan-card__area">{{ . }}</p>
+                      {{ end }}
+                    </div>
+                    {{ with .maps_url }}
+                      <a class="maps-btn" href="{{ . }}" target="_blank" rel="noreferrer" aria-label="{{ or $page.labels.fallback_maps_cta "Buka Maps" }}">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <path d="M12 21s-6-4.35-6-10a6 6 0 1 1 12 0c0 5.65-6 10-6 10Z"></path>
+                          <circle cx="12" cy="11" r="2.5"></circle>
+                        </svg>
+                      </a>
+                    {{ end }}
+                  </div>
+                  {{ with .reason }}
+                    <p class="plan-card__body">{{ . }}</p>
+                  {{ end }}
+                  <ul class="detail-list">
+                    {{ with .trigger }}<li><span><strong>Pakai kalau:</strong> {{ . }}</span></li>{{ end }}
+                    {{ with .travel_time }}<li><span><strong>Waktu tempuh:</strong> {{ . }}</span></li>{{ end }}
+                  </ul>
+                </section>
+              {{ end }}
+
+              {{ with $page.fallbacks.overcrowded }}
+                <section class="fallback-card">
+                  <p class="fallback-card__index">Terlalu Ramai</p>
+                  <div class="plan-card__top">
+                    <div>
+                      <h3 class="plan-card__venue">{{ .title }}</h3>
+                      {{ with .distance_note }}
+                        <p class="plan-card__area">{{ . }}</p>
+                      {{ end }}
+                    </div>
+                    {{ with .maps_url }}
+                      <a class="maps-btn" href="{{ . }}" target="_blank" rel="noreferrer" aria-label="{{ or $page.labels.fallback_maps_cta "Buka Maps" }}">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <path d="M12 21s-6-4.35-6-10a6 6 0 1 1 12 0c0 5.65-6 10-6 10Z"></path>
+                          <circle cx="12" cy="11" r="2.5"></circle>
+                        </svg>
+                      </a>
+                    {{ end }}
+                  </div>
+                  {{ with .reason }}
+                    <p class="plan-card__body">{{ . }}</p>
+                  {{ end }}
+                  <ul class="detail-list">
+                    {{ with .trigger }}<li><span><strong>Pakai kalau:</strong> {{ . }}</span></li>{{ end }}
+                    {{ with .travel_time }}<li><span><strong>Waktu tempuh:</strong> {{ . }}</span></li>{{ end }}
+                  </ul>
+                </section>
+              {{ end }}
+
+              {{ with $page.fallback_culinary }}
+                <section class="fallback-card">
+                  <p class="fallback-card__index">Mau Makan di Tempat Lain?</p>
+                  <div>
+                    <h3 class="plan-card__venue">{{ .title }}</h3>
+                    {{ with .note }}
+                      <p class="plan-card__body">{{ . }}</p>
+                    {{ end }}
+                  </div>
+                  <ul class="detail-list">
+                    {{ with .trigger }}<li><span><strong>Pakai kalau:</strong> {{ . }}</span></li>{{ end }}
+                  </ul>
+                  {{ with .options }}
+                    <div class="fallback-grid">
+                      {{ range . }}
+                        <section class="fallback-card">
+                          <div class="plan-card__top">
+                            <div>
+                              <h3 class="plan-card__venue">{{ .title }}</h3>
+                              {{ with .format }}
+                                <p class="plan-card__area">{{ . }}</p>
+                              {{ end }}
+                            </div>
+                            {{ with .maps_url }}
+                              <a class="maps-btn" href="{{ . }}" target="_blank" rel="noreferrer" aria-label="{{ or $page.labels.fallback_maps_cta "Buka Maps" }}">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                  <path d="M12 21s-6-4.35-6-10a6 6 0 1 1 12 0c0 5.65-6 10-6 10Z"></path>
+                                  <circle cx="12" cy="11" r="2.5"></circle>
+                                </svg>
+                              </a>
+                            {{ end }}
+                          </div>
+                          {{ with .reason }}
+                            <p class="plan-card__body">{{ . }}</p>
+                          {{ end }}
+                        </section>
+                      {{ end }}
+                    </div>
+                  {{ end }}
+                </section>
+              {{ end }}
+            </div>
+          </article>
+        {{ end }}
+      </main>
+    </div>
+
+    <footer class="footer">
+      <section>
+        <span class="eyebrow">{{ $page.labels.area_cluster_label }}</span>
+        <p class="footer__value">{{ $page.main_recommendation.area_cluster }}</p>
+      </section>
+      <section>
+        <span class="eyebrow">{{ $page.disclaimer.label }}</span>
+        <ul class="footer__list">
+          {{ range $page.disclaimer.items }}
+            <li>{{ . }}</li>
+          {{ end }}
+        </ul>
+      </section>
+    </footer>
+  </div>
+{{ end }}

@@ -1,0 +1,100 @@
+title: "RamahAnak — v3 Glide 0.2"
+slug: "glide-preview"
+hash: "g7k2r1"
+date_created: "2026-05-05T00:00:00+07:00"
+seo:
+  description: "Preview page for the RamahAnak decision format."
+labels:
+  main_plan_label: "Plan utama"
+  execution_label: "Execution window"
+  fallback_label: "Fallback routing"
+  cost_title: "Estimasi biaya"
+  activity_title: "Anak akan..."
+  reasons_title: "Kenapa ini jadi plan utama"
+  area_cluster_label: "Area cluster"
+  maps_cta: "Buka Google Maps"
+  fallback_maps_cta: "Buka Maps"
+masthead:
+  brand: "RamahAnak Premium"
+  title: "Decision preview"
+  status: "Draft preview"
+hero:
+  edition_label: "Edisi Weekend 3-4 Mei 2026"
+  lead: "Bukan katalog tempat. Ini keputusan weekend yang sudah dibersihkan dari risiko utama."
+  body: "Minggu ini rekomendasi dikunci ke satu jalur utama yang dijalankan dulu, lalu fallback dipakai hanya kalau trigger di lapangan benar-benar kejadian."
+  aside_cards:
+    - label: "Guardrail"
+      text: "Dikurasi untuk minim asap rokok, toilet layak, dan aktivitas anak usia 4-10."
+      dark: false
+    - label: "Cara pakai"
+      text: "Jalankan plan utama dulu. Backup hanya dipakai kalau trigger di lapangan benar-benar kejadian."
+      dark: true
+toc:
+  label: "Daftar isi"
+disclaimer:
+  label: "Disclaimer"
+  items:
+    - "Rekomendasi ini membantu mengurangi kerja mikir, bukan menggantikan penilaian orang tua di lapangan."
+    - "Kalau kondisi venue berubah drastis sebelum tiba, pakai fallback yang trigger-nya paling dekat dengan situasi nyata."
+    - "Google Maps dibuka sebagai alat eksekusi, bukan validasi utama isi edisi."
+summary:
+  eyebrow: "Edition summary"
+  title: "Window paling stabil minggu ini tetap ada di Nara Park sebelum crowd sore naik."
+  copy: "Rekomendasi dikunci ke outing Bandung Utara yang masih memberi ruang gerak anak, tempat duduk orang tua, dan fallback rapat saat cuaca atau crowd berubah."
+decision_outcome:
+  label: "Worth It"
+  tone: "positive"
+main_recommendation:
+  title: "Pergi ke Nara Park jam 10.30."
+  area_cluster: "Bandung Utara (<=30 min radius)"
+  identity: "Area makan keluarga di Bandung Utara dengan mini zoo gratis dan playground berbayar, cocok untuk outing santai yang tetap punya cukup ruang gerak untuk anak."
+  maps_url: "https://www.google.com/maps/search/?api=1&query=Nara+Park+Bandung"
+  execution:
+    arrival: "10.30"
+    exit_window: "Selesai sebelum 14.30"
+    degradation: "Setelah 15.30, parkir mulai lebih susah, kursi lebih penuh, dan anak biasanya mulai kehilangan fokus."
+  why_it_works:
+    - "Anak tetap punya ruang gerak tanpa orang tua harus ikut mengejar terus."
+    - "Orang tua bisa duduk dan memantau dari jarak aman."
+    - "Window 10.30-14.30 masih aman sebelum crowd sore dan traffic pulang jadi lebih berat."
+    - "Ada opsi hemat: mini zoo dan area eksplor tanpa harus langsung masuk playground berbayar."
+    - "Kalau outing mulai menurun, rute pindah ke fallback masih rapat secara geografis."
+risk:
+  title: "Why this is worth it today"
+  items:
+    - label: "Traffic"
+      text: "Datang sekitar 10.30 masih menjaga akses Bandung Utara tetap masuk akal. Setelah 15.30, jalur pulang mulai terasa lebih berat."
+    - label: "Crowd"
+      text: "Nilai outing tetap tinggi sebelum crowd sore naik. Begitu parkir dan kursi mulai padat, fallback perlu dipakai tanpa menunggu terlalu lama."
+    - label: "Smoke exposure"
+      text: "Venue utama dipilih karena tetap masuk guardrail paparan asap serendah mungkin untuk konteks outing keluarga."
+    - label: "Rain"
+      text: "Selama cuaca masih ringan, plan utama tetap layak. Kalau hujan membuat ruang outdoor kehilangan nilainya, fallback indoor langsung mengambil alih."
+fallbacks:
+  nearby:
+    title: "Baker Street"
+    trigger: "Pakai jika orang tua butuh outing yang lebih tenang dan kurang aktif."
+    reason: "Lebih tenang untuk duduk, makan ringan, dan menurunkan intensitas tanpa bikin outing terasa gagal total."
+    distance_note: "2 KM / 10-15 menit dari Nara Park"
+    travel_time: "10-15 min"
+    maps_url: "https://www.google.com/maps/search/?api=1&query=Baker+Street+Bandung"
+  weather:
+    title: "Hompimplay"
+    trigger: "Pakai jika hujan membuat jalur outdoor tidak lagi nyaman dipakai."
+    reason: "Lebih tahan hujan dan tetap menjaga anak bergerak saat outdoor tidak lagi bisa dipakai."
+    distance_note: "8 KM / 20-30 menit dari Nara Park"
+    travel_time: "20-30 min"
+    maps_url: "https://www.google.com/maps/search/?api=1&query=Hompimplay+Bandung"
+  overcrowded:
+    title: "Laloba"
+    trigger: "Pakai jika parkir dan crowd di venue utama terlalu padat."
+    reason: "Indoor, ritmenya tetap aktif, dan lebih mudah dijalankan sebagai pengganti cepat tanpa putar area terlalu jauh."
+    distance_note: "4 KM / 12-18 menit dari Nara Park"
+    travel_time: "12-18 min"
+    maps_url: "https://www.google.com/maps/search/?api=1&query=Laloba+Bandung"
+execution_details:
+  parking: "Datang mendekati 10.30 menjaga window parkir lebih ringan sebelum crowd sore naik."
+  toilet: "Guardrail brief ini memang menargetkan venue dengan toilet layak untuk keluarga, tapi detail toilet venue tidak disebutkan lebih jauh di data sumber."
+  prayer: "Akses ibadah tidak disebutkan eksplisit di data sumber, jadi jangan jadikan halaman ini sebagai validasi fasilitas salat."
+  kids_activity: "Anak akan lihat hewan kecil dan mini zoo, jalan dan eksplor area outdoor, lalu masuk playground kalau energi masih tinggi."
+  cutoff: "Kalau keluarga masih belum benar-benar masuk ritme outing sebelum 14.30, nilai plan mulai turun dan setelah 15.30 crowd ikut menaik."

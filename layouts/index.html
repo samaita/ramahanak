@@ -1,0 +1,574 @@
+{{ define "meta" }}
+  {{ $page := site.Data.pages.landing_page }}
+  <title>{{ $page.seo.title }}</title>
+  <meta name="description" content="{{ $page.seo.description }}">
+{{ end }}
+
+{{ define "fonts" }}
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,700;1,9..144,900&display=swap" rel="stylesheet">
+{{ end }}
+
+{{ define "styles" }}
+  {{ partial "site-shell-styles.html" . | safeCSS }}
+
+  .section-block {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 72px 24px 0;
+  }
+  .section-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .section-header__index {
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--forest);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .section-header__h {
+    font-family: var(--font-head);
+    font-size: clamp(28px, 4.5vw, 42px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -.03em;
+    color: var(--ink);
+    max-width: 620px;
+  }
+
+  .cards-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 10px;
+  }
+  .card {
+    background: var(--paper-lift);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform .2s, border-color .2s;
+  }
+  .card:hover { transform: translateY(-3px); border-color: var(--forest-mid); }
+  .card__body { padding: 20px 20px 24px; }
+  .card__num {
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--forest);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .card__title {
+    font-family: var(--font-head);
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -.02em;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  .card__desc {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-3);
+  }
+
+  .problem-card__mark {
+    width: 42px;
+    height: 42px;
+    margin: 20px 0 0 20px;
+    border-radius: 50%;
+    border: 1px solid rgba(45, 90, 61, .18);
+    background: linear-gradient(135deg, rgba(230, 240, 233, .95), rgba(240, 236, 228, .95));
+    display: grid;
+    place-items: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--forest);
+  }
+
+  .steps-list {
+    list-style: none;
+    display: grid;
+    gap: 12px;
+  }
+  .step-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 18px;
+    padding: 22px 24px;
+    background: var(--paper-lift);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    align-items: start;
+  }
+  .step-card__num {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--forest);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .step-card__title {
+    font-family: var(--font-head);
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -.02em;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .step-card p {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--ink-3);
+    max-width: 680px;
+  }
+
+  .gold-band {
+    background: var(--ink);
+    margin-top: 72px;
+    padding: 72px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .gold-band::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.68' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+  .gold-band__inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+  .gold-band__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+  .gold-band__index {
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--forest-mid);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .gold-band__h {
+    font-family: var(--font-head);
+    font-size: clamp(28px, 4.5vw, 42px);
+    font-weight: 700;
+    letter-spacing: -.03em;
+    color: #f0ece4;
+    line-height: 1.15;
+    max-width: 620px;
+  }
+  .gold-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+  }
+  .gold-card {
+    background: rgba(255, 255, 255, .05);
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 10px;
+    padding: 22px;
+  }
+  .gold-card__label {
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--forest-mid);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .gold-card__title {
+    font-family: var(--font-head);
+    font-size: 18px;
+    font-weight: 700;
+    color: #f0ece4;
+    letter-spacing: -.02em;
+    margin-bottom: 8px;
+    line-height: 1.25;
+  }
+  .gold-card p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgba(240, 236, 228, .6);
+  }
+
+  .editions-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(260px, .85fr);
+    gap: 14px;
+  }
+  .edition-featured {
+    background: linear-gradient(160deg, #f7f4ef 0%, #ede7db 100%);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+    display: grid;
+    gap: 16px;
+    box-shadow: 0 18px 38px rgba(26, 24, 21, .08);
+  }
+  .edition-featured__eyebrow,
+  .edition-archive__eyebrow {
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .edition-featured__eyebrow { color: var(--forest); }
+  .edition-featured__title {
+    font-family: var(--font-head);
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -.03em;
+    color: var(--ink);
+  }
+  .edition-featured__summary {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink-3);
+    max-width: 560px;
+  }
+  .edition-featured__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--forest);
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .edition-featured__link:hover { gap: 14px; }
+  .edition-featured__link::after { content: "→"; }
+  .edition-archive {
+    background: rgba(247, 244, 239, .7);
+    border: 1px solid rgba(208, 202, 184, .8);
+    border-radius: 12px;
+    padding: 22px;
+    display: grid;
+    align-content: start;
+    gap: 12px;
+  }
+  .edition-archive__eyebrow { color: var(--ink-3); }
+  .edition-archive__list {
+    display: grid;
+    gap: 10px;
+  }
+  .edition-archive__card {
+    padding: 16px;
+    border-radius: 10px;
+    background: rgba(240, 236, 228, .78);
+    border: 1px solid rgba(208, 202, 184, .8);
+    transition: border-color .15s, transform .15s;
+  }
+  .edition-archive__card:hover {
+    border-color: var(--forest-mid);
+    transform: translateY(-2px);
+  }
+  .edition-archive__title {
+    font-family: var(--font-head);
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .edition-archive__summary {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-3);
+  }
+
+  .trust-section {
+    max-width: var(--max);
+    margin: 72px auto 0;
+    padding: 0 24px;
+  }
+  .trust-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+  .trust-header__index {
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--forest);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .trust-header__h {
+    font-family: var(--font-head);
+    font-size: clamp(28px, 4.5vw, 42px);
+    font-weight: 700;
+    letter-spacing: -.03em;
+    color: var(--ink);
+    line-height: 1.15;
+  }
+  .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 10px;
+  }
+  .trust-card {
+    padding: 24px;
+    background: var(--paper-lift);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .trust-card__icon {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 14px;
+    background: var(--forest-pale);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+  .trust-card__title {
+    font-family: var(--font-head);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -.01em;
+    margin-bottom: 8px;
+  }
+  .trust-card p,
+  .trust-card ul {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--ink-3);
+  }
+  .trust-card ul {
+    padding-left: 18px;
+    margin-top: 8px;
+    display: grid;
+    gap: 6px;
+  }
+
+  .footer {
+    max-width: var(--max);
+    margin: 72px auto 0;
+    padding: 28px 24px 80px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .footer__brand {
+    font-family: var(--font-head);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .footer__brand span { color: var(--forest); font-style: italic; }
+  .footer__copy { font-size: 12px; color: var(--ink-3); }
+
+  @media (max-width: 819px) {
+    .editions-layout {
+      grid-template-columns: 1fr;
+    }
+    .edition-featured {
+      padding: 24px 20px;
+    }
+    .footer { flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 639px) {
+    .section-block,
+    .trust-section,
+    .footer {
+      padding-left: 18px;
+      padding-right: 18px;
+    }
+    .section-block {
+      padding-top: 64px;
+    }
+    .step-card {
+      grid-template-columns: 1fr;
+      gap: 14px;
+      padding: 20px;
+    }
+  }
+{{ end }}
+
+{{ define "main" }}
+  {{ $page := site.Data.pages.landing_page }}
+  {{ partial "site-nav.html" (dict "homeOnly" false) }}
+
+  <section class="hero">
+    <div class="hero__bg">
+      {{ partial "mountain-hero-art.html" . }}
+    </div>
+    <div class="hero__scrim"></div>
+    <div class="hero__content">
+      <p class="hero__kicker">{{ $page.hero.eyebrow }}</p>
+      <h1 class="hero__title">{{ $page.hero.title }}</h1>
+      <p class="hero__sub">{{ $page.hero.lead }}</p>
+      <div class="hero__actions">
+        <a href="{{ $page.hero.primary_cta.href }}" class="btn-hero">
+          {{ $page.hero.primary_cta.label }}
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="{{ $page.hero.secondary_cta.href }}" class="btn-hero-ghost">{{ $page.hero.secondary_cta.label }}</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="problem" class="section-block">
+    <div class="section-header">
+      <div>
+        <p class="section-header__index">{{ $page.problem.eyebrow }}</p>
+        <h2 class="section-header__h">{{ $page.problem.heading }}</h2>
+      </div>
+    </div>
+    <div class="cards-row">
+      {{ range $index, $card := $page.problem.cards }}
+        <article class="card">
+          <div class="problem-card__mark">{{ printf "%02d" (add $index 1) }}</div>
+          <div class="card__body">
+            <p class="card__num">Issue {{ printf "%02d" (add $index 1) }}</p>
+            <h3 class="card__title">{{ $card.title }}</h3>
+            <p class="card__desc">{{ $card.copy }}</p>
+          </div>
+        </article>
+      {{ end }}
+    </div>
+  </section>
+
+  <section id="how-it-works" class="section-block">
+    <div class="section-header">
+      <div>
+        <p class="section-header__index">{{ $page.how_it_works.eyebrow }}</p>
+        <h2 class="section-header__h">{{ $page.how_it_works.heading }}</h2>
+      </div>
+    </div>
+    <ol class="steps-list">
+      {{ range $index, $step := $page.how_it_works.steps }}
+        <li class="step-card">
+          <div class="step-card__num">{{ add $index 1 }}</div>
+          <div>
+            <h3 class="step-card__title">{{ $step.title }}</h3>
+            <p>{{ $step.copy }}</p>
+          </div>
+        </li>
+      {{ end }}
+    </ol>
+  </section>
+
+  <section class="gold-band" id="gold-standard">
+    <div class="gold-band__inner">
+      <div class="gold-band__header">
+        <div>
+          <p class="gold-band__index">{{ $page.gold_standard.eyebrow }}</p>
+          <h2 class="gold-band__h">{{ $page.gold_standard.heading }}</h2>
+        </div>
+      </div>
+      <div class="gold-grid">
+        {{ range $index, $card := $page.gold_standard.cards }}
+          <article class="gold-card">
+            <p class="gold-card__label">{{ printf "Standard %02d" (add $index 1) }}</p>
+            <h3 class="gold-card__title">{{ $card.title }}</h3>
+            <p>{{ $card.copy }}</p>
+          </article>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+
+  <section id="weekly-editions" class="section-block">
+    <div class="section-header">
+      <div>
+        <p class="section-header__index">{{ $page.weekly_editions.eyebrow }}</p>
+        <h2 class="section-header__h">{{ $page.weekly_editions.featured.title }}</h2>
+      </div>
+    </div>
+    <div class="editions-layout">
+      <article class="edition-featured">
+        <p class="edition-featured__eyebrow">Featured edition</p>
+        <h3 class="edition-featured__title">{{ $page.weekly_editions.featured.title }}</h3>
+        <p class="edition-featured__summary">{{ $page.weekly_editions.featured.summary }}</p>
+        <a href="{{ $page.weekly_editions.featured.href }}" class="edition-featured__link">Open this week's pick</a>
+      </article>
+      <aside class="edition-archive" aria-label="Edition archive">
+        <p class="edition-archive__eyebrow">Archive</p>
+        <div class="edition-archive__list">
+          {{ range $page.weekly_editions.archive }}
+            <a href="{{ .href }}" class="edition-archive__card">
+              <h3 class="edition-archive__title">{{ .title }}</h3>
+              <p class="edition-archive__summary">{{ .summary }}</p>
+            </a>
+          {{ end }}
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section id="trust">
+    <div class="trust-section">
+      <div class="trust-header">
+        <div>
+          <p class="trust-header__index">{{ $page.trust.eyebrow }}</p>
+          {{ with $page.trust.heading }}
+            <h2 class="trust-header__h">{{ . }}</h2>
+          {{ else }}
+            <h2 class="trust-header__h">Trust signals</h2>
+          {{ end }}
+        </div>
+      </div>
+      <div class="trust-grid">
+        {{ range $page.trust.cards }}
+          <article class="trust-card">
+            <div class="trust-card__icon">✦</div>
+            <h3 class="trust-card__title">{{ .title }}</h3>
+            {{ with .copy }}<p>{{ . }}</p>{{ end }}
+            {{ with .items }}
+              <ul>
+                {{ range . }}
+                  <li>{{ . }}</li>
+                {{ end }}
+              </ul>
+            {{ end }}
+          </article>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span class="footer__brand">{{ $page.masthead.title | replaceRE "^(.*?)([A-Z][a-zA-Z]+)$" "$1<span>$2</span>" | safeHTML }}</span>
+    <span class="footer__copy">Curated weekly family outing editions for Bandung.</span>
+  </footer>
+
+  {{ partial "nav-scroll-script.html" . }}
+{{ end }}

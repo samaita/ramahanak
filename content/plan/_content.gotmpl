@@ -1,0 +1,20 @@
+{{ range $name, $page := site.Data.pages }}
+  {{ if and $page.hash $page.date_created (or $page.path_slug $page.slug) $page.summary $page.decision_outcome $page.main_recommendation }}
+    {{ $date := time.AsTime $page.date_created }}
+    {{ $pathSlug := $page.slug }}
+    {{ with $page.path_slug }}
+      {{ $pathSlug = . }}
+    {{ end }}
+    {{ $path := printf "%s-%s-%s" $page.hash (dateFormat "20060102" $date) $pathSlug }}
+    {{ $.AddPage (dict
+      "path" $path
+      "title" $page.title
+      "date" $date
+      "outputs" (slice "html")
+      "sitemap" (dict "disable" true)
+      "build" (dict "list" "never" "render" "always")
+      "params" $page
+      "content" (dict "mediaType" "text/markdown" "value" "")
+    ) }}
+  {{ end }}
+{{ end }}

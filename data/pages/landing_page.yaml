@@ -1,0 +1,77 @@
+seo:
+  title: "RamahAnak — Weekend Plan Tanpa Ribet"
+  description: "RamahAnak membantu keluarga Bandung memilih satu rencana weekend yang layak dijalankan."
+masthead:
+  title: "RamahAnak"
+  tagline: "Weekend plan tanpa ribet, bebas asap rokok."
+  nav:
+    - label: "Problem"
+      href: "#problem"
+      class: "mast__nav-link"
+    - label: "How it works"
+      href: "#how-it-works"
+      class: "mast__nav-link"
+    - label: "This week's editions"
+      href: "#weekly-editions"
+      class: "button button--primary"
+hero:
+  eyebrow: "Family Decision Product"
+  title: "RamahAnak membantu keluarga Bandung memutuskan weekend tanpa ribet."
+  lead: "Bukan direktori tempat. Bukan blog inspirasi. RamahAnak menyaring risiko dan memberi satu rekomendasi yang layak dijalankan."
+  primary_cta:
+    label: "This Week's Editions"
+    href: "#weekly-editions"
+  secondary_cta:
+    label: "How it works"
+    href: "#how-it-works"
+problem:
+  eyebrow: "The problem"
+  heading: "Weekend keluarga biasanya macet sebelum mobil jalan."
+  cards:
+    - title: "Decision fatigue"
+      copy: "Terlalu banyak opsi membuat orang tua habis waktu membandingkan venue tanpa pernah benar-benar yakin."
+    - title: "Execution risk"
+      copy: "Plan terlihat bagus di layar, lalu gagal di lapangan karena crowd, cuaca, parkir, atau timing tidak realistis."
+    - title: "Mismatch risk"
+      copy: "Venue bisa terasa cocok di review umum, tapi ritmenya tidak pas untuk energi anak dan orang tua minggu itu."
+how_it_works:
+  eyebrow: "How it works"
+  heading: "RamahAnak menyederhanakan keputusan menjadi satu jalur yang bisa dijalankan."
+  steps:
+    - title: "Filter venues"
+      copy: "Venue tidak masuk hanya karena populer. RamahAnak memulai dari kelayakan keluarga, bukan hype."
+    - title: "Add weekend risks"
+      copy: "Cuaca, crowd, toilet, smoke exposure, dan friction operasional dimasukkan sebelum rekomendasi diterbitkan."
+    - title: "Publish one weekly recommendation"
+      copy: "Hasil akhirnya bukan list panjang, tapi satu edisi mingguan dengan keputusan utama dan arah fallback yang jelas."
+gold_standard:
+  eyebrow: "Gold standard"
+  heading: "Standar minimum sebelum sebuah venue layak direkomendasikan."
+  cards:
+    - title: "Minimal smoke exposure"
+      copy: "Area utama outing harus menjaga paparan asap tetap serendah mungkin untuk anak."
+    - title: "Clean toilet"
+      copy: "Toilet yang layak pakai bukan detail kecil. Ini syarat dasar outing keluarga yang tidak merepotkan."
+    - title: "Less crowd"
+      copy: "Keramaian ditekan untuk mengurangi stres, antrean, dan waktu terbuang."
+    - title: "Kids can have activities"
+      copy: "Anak tetap perlu aktivitas yang cukup agar outing terasa benar-benar worth it."
+weekly_editions:
+  eyebrow: "This week's editions"
+  featured:
+    title: "Seharian Main di HomPim Play"
+    href: "/plan/019e50f8-f6da-7e4b-bb50-487678bf8f7b-20260523-bandung/"
+    summary: "HomPim Play jadi pilihan utama minggu ini karena anak bisa tetap main seharian, dan kalau hujan turun pun masih aman lanjut di indoor."
+  archive:
+    - title: "Decision preview - 5 Mei 2026"
+      href: "/plan/g7k2r1-20260505-glide-preview/"
+      summary: "Preview decision format untuk outing keluarga dengan fallback yang rapat."
+trust:
+  eyebrow: "Why this is reliable"
+  cards:
+    - title: "Manual curation"
+      copy: "RamahAnak tidak menebak-nebak venue. Data dijaga konservatif dan diprioritaskan dari validasi langsung."
+    - title: "Operational thinking"
+      copy: "Rekomendasi tidak berhenti di venue. Timing, exit window, dan fallback adalah bagian dari produk."
+    - title: "Built with Google Cloud"
+      copy: "Google Cloud dipakai sebagai infrastruktur pendukung, bukan pusat cerita produk."

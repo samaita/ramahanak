@@ -1,0 +1,101 @@
+title: "Seharian Main di HomPim Play"
+slug: "20260523-bandung"
+path_slug: "bandung"
+hash: "019e50f8-f6da-7e4b-bb50-487678bf8f7b"
+date_created: "2026-05-23T00:00:00+07:00"
+seo:
+  description: "Seharian main di HomPim Play pada 23 Mei 2026, dengan plan yang aman kalau hujan dan selesai cukup awal supaya tidak kena macet konvoi Persib."
+labels:
+  main_plan_label: "Plan utama"
+  execution_label: "Mulai pulang"
+  execution_details_title: "Detail Pelaksanaan"
+  fallback_label: "Rencana Antisipasi"
+  cost_title: "Estimasi biaya"
+  activity_title: "Anak akan..."
+  reasons_title: "Kenapa ini jadi plan utama"
+  area_cluster_label: "Area"
+  maps_cta: "Buka Google Maps"
+  fallback_maps_cta: "Buka Maps"
+masthead:
+  brand: "RamahAnak"
+  title: "Bandung - 23 Mei 2026"
+  status: "23 Mei 2026"
+hero:
+  edition_label: "Bandung - 23 Mei 2026"
+  lead: "Kalau mau ambil opsi yang paling gampang dijalankan hari ini, seharian di HomPim Play paling aman. Anak punya banyak pilihan main, dan kalau hujan turun pun harinya tidak langsung berantakan."
+  body: "Enaknya, pagi bisa pakai dulu untuk aktivitas outdoor atau semi-outdoor sebelum makan siang. Setelah itu tinggal geser santai ke area indoor. Yang penting, mulai siap keluar paling lambat jam 14.00 supaya masih ada buffer dua jam untuk balik ke hotel sebelum playoff Persib jam 16.00 dan tidak ikut ketahan macet konvoi di jalan utama yang kemungkinan ramai sampai Minggu, 24 Mei 2026."
+  aside_cards:
+    - label: "Guardrail"
+      text: "Kunci hari ini sederhana: pilih tempat yang aman kalau hujan, minim asap rokok, dan jangan pulang mepet saat arus konvoi mulai kebentuk."
+      dark: false
+toc:
+  label: "Daftar isi"
+disclaimer:
+  label: "Catatan"
+  items:
+    - "Halaman ini tujuannya bantu meringankan mikir, bukan menggantikan keputusan orang tua di lapangan."
+    - "Kalau kondisi tempat berubah jauh dari perkiraan, pakai fallback yang paling cocok dengan situasi saat itu."
+    - "Link Google Maps dipakai buat eksekusi, bukan sebagai sumber utama penilaian plan."
+summary:
+  eyebrow: "Ringkasan"
+  title: "Bawa anak main seharian di HomPim Play."
+  copy: "Ini jadi pilihan paling aman karena kalaupun hujan, anak masih bisa lanjut main seharian di area indoor. Main seharian juga tetap masuk akal karena aktivitasnya banyak, jadi bisa pilih yang paling cocok dengan mood dan energi anak."
+decision_outcome:
+  label: "Aman dipilih, sebelum Persib konvoi."
+  tone: "positive"
+main_recommendation:
+  title: "Masuk HomPim Play sekitar pukul 09.00, pulang sebelum pukul 15.00."
+  area_cluster: "Dago Pakar"
+  identity: "Tempat ini enak buat dijadikan tempat utama main seharian karena pilihannya banyak: ada area indoor bertingkat, farm, dan aktivitas fisik yang bisa dipakai dulu sebelum makan siang, lalu lanjut santai di indoor kalau cuaca mulai berubah."
+  maps_url: "https://maps.google.com/?cid=376918884949514565"
+  execution:
+    arrival: "09.00"
+    exit_window: "Keluar area maksimal 14.00"
+    degradation: "Lewat jam 13.00 peluang hujan mulai naik. Kalau baru keluar setelah jam 14.00, buffer buat menghindari macet konvoi Persib juga mulai kepotong."
+  why_it_works:
+    - "Sabtu sudah buka dari jam 09.00, jadi pagi yang cuacanya masih enak bisa dipakai dulu untuk main di area luar."
+    - "Kalau hujan datang, tidak perlu buru-buru pindah karena masih ada banyak area indoor yang bisa dipakai lanjut main."
+    - "Soal asap juga relatif aman, karena area merokok dipisah dan tidak nyampur dengan jalur utama anak bermain."
+risk:
+  title: "Hal yang perlu diperhatikan"
+  items:
+    - label: "Cuaca"
+      text: "Cuaca pagi di Cimenyan masih cukup enak buat main di luar. Risiko hujan ringan baru mulai naik sekitar jam 13.00, jadi yang outdoor atau semi-outdoor lebih baik dipakai dulu sebelum makan siang, lalu setelah itu pindah santai ke indoor."
+    - label: "Lalu lintas"
+      text: "Jam 16.00 ada pertandingan Persib, jadi target amannya sudah sampai hotel sebelum kickoff. Karena itu lebih aman mulai keluar maksimal jam 14.00, hindari jalan utama, dan jangan ambil risiko pulang terlalu mepet karena arus konvoi bisa bikin macet berat sampai Minggu, 24 Mei 2026."
+    - label: "Asap Rokok / Vape"
+      text: "Untuk ukuran outing keluarga, paparan asap di HomPim Play termasuk rendah. Area merokoknya dipisah di tiap lantai dan bukan di jalur utama anak, jadi masih jauh lebih aman dibanding opsi kuliner cadangan di sekitar."
+fallbacks:
+  weather:
+    title: "Tetap di HomPim Play"
+    trigger: "Pakai kalau hujan mulai turun atau area luar sudah tidak nyaman dipakai lama."
+    reason: "Tidak perlu ribet pindah tempat. Tinggal lanjutkan hari di area indoor karena bangunannya memang sudah siap buat itu."
+    distance_note: "Tidak perlu pindah venue"
+    travel_time: "0 min"
+    maps_url: "https://maps.google.com/?cid=376918884949514565"
+  overcrowded:
+    title: "Cafe D'pakar"
+    trigger: "Pakai hanya kalau HomPim Play terasa terlalu padat dan keluarga memang ingin pindah sebentar sebelum pulang."
+    reason: "Lokasinya masih searah area Dago Pakar dan cukup gampang dijadikan cadangan, tapi tetap bukan pilihan utama karena kurang tahan hujan dan risiko asapnya lebih tinggi."
+    distance_note: "Sekitar 3-5 KM dari HomPim Play"
+    travel_time: "10-15 min"
+    maps_url: "https://maps.app.goo.gl/bST4NSxutgszefYWA"
+fallback_culinary:
+  title: "Kalau mau makan di tempat lain"
+  trigger: "Pakai kalau butuh beli makan cepat sambil tetap jaga buffer pulang."
+  note: "Dua opsi ini lebih aman dibungkus saja, tidak usah makan di tempat, karena risiko asap rokoknya sama-sama tinggi."
+  options:
+    - title: "Babat Goreng Nikmat Berkah"
+      format: "Takeaway"
+      reason: "Warung ini baru buka jam 12.00 dan enak dijadikan stop cepat buat bungkus makan. Tapi karena area makannya semi-terbuka dan risiko asapnya tinggi, lebih aman langsung dibungkus."
+      maps_url: "https://maps.app.goo.gl/L44UaFkskB7AX14N6"
+    - title: "WaLe Warung Lela"
+      format: "Takeaway"
+      reason: "Ini bisa jadi pilihan kedua kalau mau menu yang lebih ringan buat keluarga. Tetap lebih aman dibawa pulang atau ke hotel karena area semi-outdoornya juga berisiko tinggi kena asap."
+      maps_url: "https://www.google.com/maps/contrib/113714998697456925725/reviews"
+execution_details:
+  parking: "Kalau bisa sampai sekitar jam 09.00, akses masuk dan parkir biasanya masih lebih ringan. Setelah itu tinggal nikmati hari, tapi tetap mulai ancang-ancang keluar sebelum jam 14.00."
+  toilet: "Toiletnya ada di tiap level dan tercatat cukup bersih, jadi relatif aman kalau memang mau dipakai main beberapa jam dengan anak."
+  prayer: "Data yang ada belum cukup jelas soal fasilitas ibadah, jadi bagian ini jangan dipakai sebagai pegangan utama."
+  kids_activity: "Utamakan outdoor activity dulu sebelum hujan. Lebih worth it tiket satuan, lebih worth it karena banyak permainan khusus usia 7 tahun ke atas."
+  cutoff: "Patokannya tetap jam 15.00 sudah meninggalkan venue. Setelah itu buffer buat balik ke hotel sebelum pertandingan Persib jam 16.00, dan risiko kena macet konvoi secommitmakin besar."

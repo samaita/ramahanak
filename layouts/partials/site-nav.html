@@ -1,0 +1,28 @@
+{{ $page := site.Data.pages.landing_page }}
+{{ $navItems := $page.masthead.nav }}
+{{ $homeOnly := .homeOnly | default false }}
+<header class="nav">
+  <div class="nav__inner">
+    <details class="nav__burger">
+      <summary aria-label="Menu">
+        <span class="nav__burger-icon"><em></em></span>
+      </summary>
+      <div class="nav__drawer">
+        {{ range $navItems }}
+          <a href="{{ if $homeOnly }}/{{ else }}{{ .href }}{{ end }}">{{ .label }}</a>
+        {{ end }}
+      </div>
+    </details>
+    <a href="/" class="nav__logo">{{ $page.masthead.title | replaceRE "^(.*?)([A-Z][a-zA-Z]+)$" "$1<span>$2</span>" | safeHTML }}</a>
+    <nav class="nav__links">
+      {{ range $navItems }}
+        <a href="{{ if $homeOnly }}/{{ else }}{{ .href }}{{ end }}" class="{{ if eq .class "button button--primary" }}nav__cta{{ else }}nav__link{{ end }}">{{ .label }}</a>
+      {{ end }}
+    </nav>
+    {{ range $navItems }}
+      {{ if eq .class "button button--primary" }}
+        <a href="{{ if $homeOnly }}/{{ else }}{{ .href }}{{ end }}" class="nav__cta nav__mob-cta">{{ .label }}</a>
+      {{ end }}
+    {{ end }}
+  </div>
+</header>

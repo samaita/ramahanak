@@ -1,0 +1,619 @@
+{{ define "meta" }}
+  {{ $page := site.Data.pages.blog }}
+  <title>{{ $page.seo.title }}</title>
+  <meta name="description" content="{{ $page.seo.description }}">
+{{ end }}
+
+{{ define "fonts" }}
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,700&display=swap" rel="stylesheet">
+{{ end }}
+
+{{ define "styles" }}
+  :root {
+    color-scheme: light only;
+    --paper: #f0ece4;
+    --paper-lift: #f7f4ef;
+    --paper-dark: #e8e3d9;
+    --ink: #1a1815;
+    --ink-2: #3d3a35;
+    --ink-3: #6b6760;
+    --forest: #2d5a3d;
+    --forest-mid: #4a7c5e;
+    --forest-pale: #e6f0e9;
+    --amber: #c4782a;
+    --amber-pale: #f5e9d8;
+    --border: #d0cab8;
+    --shadow-soft: 0 18px 40px rgba(26, 24, 21, 0.08);
+    --font-head: "Fraunces", ui-serif, serif;
+    --font-body: "DM Sans", ui-sans-serif, sans-serif;
+    --page-width: 960px;
+  }
+  * { box-sizing: border-box; }
+  *::before,
+  *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    color: var(--ink);
+    background: var(--paper);
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.68' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    -webkit-font-smoothing: antialiased;
+  }
+  body::before,
+  body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: max(0px, calc((100vw - var(--page-width)) / 2));
+    background: var(--paper-dark);
+    opacity: 0.55;
+    pointer-events: none;
+    z-index: -1;
+  }
+  body::before { left: 0; }
+  body::after { right: 0; }
+  a { color: inherit; text-decoration: none; }
+  .mast {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    background: rgba(240, 236, 228, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .mast__inner,
+  .shell {
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .mast__inner {
+    min-height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: max(env(safe-area-inset-top), 16px);
+    padding-bottom: 16px;
+  }
+  .mast__brand {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .mast__brand-link {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .mast__title,
+  .section-title,
+  .hero__title {
+    margin: 0;
+    color: var(--ink);
+  }
+  .mast__title {
+    font-family: var(--font-head);
+    font-size: 18px;
+    line-height: 1.05;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .mast__tag { margin: 0; font-size: 12px; line-height: 1.4; color: var(--ink-3); }
+  .mast__nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  .mast__burger {
+    display: none;
+    position: relative;
+  }
+  .mast__burger-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    background: var(--paper-lift);
+    color: var(--ink);
+    cursor: pointer;
+    list-style: none;
+  }
+  .mast__burger-toggle::-webkit-details-marker {
+    display: none;
+  }
+  .mast__burger-icon {
+    position: relative;
+    display: block;
+    width: 18px;
+    height: 12px;
+  }
+  .mast__burger-icon::before,
+  .mast__burger-icon::after,
+  .mast__burger-icon span {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 18px;
+    height: 2px;
+    border-radius: 999px;
+    background: currentColor;
+    transition: transform 0.18s ease, opacity 0.18s ease, top 0.18s ease;
+  }
+  .mast__burger-icon::before { top: 0; }
+  .mast__burger-icon span { top: 5px; }
+  .mast__burger-icon::after { top: 10px; }
+  .mast__burger[open] .mast__burger-icon::before {
+    top: 5px;
+    transform: rotate(45deg);
+  }
+  .mast__burger[open] .mast__burger-icon span {
+    opacity: 0;
+  }
+  .mast__burger[open] .mast__burger-icon::after {
+    top: 5px;
+    transform: rotate(-45deg);
+  }
+  .mast__burger-panel {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    min-width: 220px;
+    padding: 10px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: rgba(247, 244, 239, 0.98);
+    box-shadow: var(--shadow-soft);
+    display: grid;
+    gap: 6px;
+  }
+  .mast__burger-link {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    color: var(--ink-3);
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  .mast__burger-link:hover,
+  .mast__burger-link:focus-visible {
+    background: var(--forest-pale);
+    color: var(--forest);
+  }
+  .mast__mobile-cta {
+    display: none !important;
+    flex: 0 0 auto;
+  }
+  .mast__nav-link,
+  .pill-link,
+  .article-card__cta,
+  .pagination a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 10px 16px;
+    border-radius: 4px;
+    font-size: 13px;
+    line-height: 1.4;
+    font-weight: 700;
+    transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, color 0.18s ease;
+  }
+  .mast__nav-link { color: var(--ink-3); }
+  .pill-link {
+    background: var(--forest);
+    color: #fff;
+    border: 1px solid var(--forest);
+  }
+  .mast__nav .pill-link {
+    color: #fff;
+  }
+  .mast__nav-link:hover,
+  .mast__nav-link:focus-visible,
+  .pill-link:hover,
+  .pill-link:focus-visible,
+  .article-card__cta:hover,
+  .article-card__cta:focus-visible,
+  .pagination a:hover,
+  .pagination a:focus-visible {
+    transform: translateY(-1px);
+  }
+  .mast__nav-link:hover,
+  .mast__nav-link:focus-visible { color: var(--ink); }
+  .pill-link:hover,
+  .pill-link:focus-visible {
+    background: var(--forest-mid);
+    border-color: var(--forest-mid);
+  }
+  .shell { padding-top: 56px; padding-bottom: 96px; }
+  .eyebrow,
+  .label,
+  .meta-chip,
+  .category-chip {
+    font-size: 12px;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+  .eyebrow,
+  .label {
+    color: var(--forest);
+    font-weight: 600;
+  }
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(320px, 0.85fr);
+    gap: 28px;
+    align-items: end;
+    padding-bottom: 44px;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero__kicker,
+  .category-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: var(--amber-pale);
+    color: var(--amber);
+  }
+  .hero__title {
+    margin-bottom: 18px;
+    font-family: var(--font-head);
+    font-size: clamp(48px, 7vw, 82px);
+    line-height: 0.97;
+    letter-spacing: -0.04em;
+    font-weight: 900;
+  }
+  .hero__lead,
+  .section-copy {
+    margin: 0 0 14px;
+    font-size: 19px;
+    line-height: 1.55;
+  }
+  .hero__body,
+  .aside-card__text,
+  .article-card__summary,
+  .article-card__signal,
+  .category-card__copy,
+  .cta-strip__copy {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--ink-3);
+  }
+  .hero__aside,
+  .content-layout {
+    display: grid;
+    gap: 24px;
+  }
+  .hero__aside { gap: 12px; }
+  .content-layout {
+    grid-template-columns: minmax(0, 1fr);
+    margin-top: 32px;
+  }
+  .aside-card,
+  .category-card,
+  .article-card,
+  .cta-strip,
+  .pagination a,
+  .pagination span {
+    border-radius: 12px;
+  }
+  .aside-card,
+  .category-card {
+    padding: 16px;
+    background: var(--paper-lift);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-soft);
+  }
+  .aside-card--dark {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .panel {
+    display: grid;
+    gap: 24px;
+  }
+  .panel__block {
+    padding: 20px;
+    border-radius: 12px;
+    background: var(--paper-lift);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-soft);
+  }
+  .panel__block--primary {
+    background:
+      linear-gradient(180deg, rgba(230, 240, 233, 0.95) 0%, rgba(247, 244, 239, 0.9) 140px),
+      var(--paper-lift);
+    border: 1px solid rgba(74, 124, 94, 0.32);
+  }
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: end;
+  }
+  .section-title {
+    font-family: var(--font-head);
+    font-size: clamp(31px, 4vw, 44px);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+  }
+  .category-grid,
+  .article-grid {
+    display: grid;
+    gap: 16px;
+  }
+  .category-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .article-card {
+    padding: 18px;
+    border: 1px solid var(--border);
+    background: var(--paper-lift);
+    box-shadow: var(--shadow-soft);
+  }
+  .article-card__top,
+  .article-card__meta,
+  .article-card__footer,
+  .cta-strip,
+  .pagination {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .article-card__title {
+    margin: 14px 0 10px;
+    color: var(--ink);
+    font-family: var(--font-head);
+    font-size: 30px;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+  }
+  .article-card__cta,
+  .pagination a {
+    min-width: 42px;
+    border: 1px solid var(--forest);
+    background: var(--forest);
+    color: #fff;
+  }
+  .cta-strip {
+    padding: 20px;
+    background: var(--ink);
+    color: var(--paper);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: var(--shadow-soft);
+  }
+  .cta-strip__actions,
+  .pagination {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .primary,
+  .secondary {
+    display: inline-flex;
+    min-height: 42px;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 18px;
+    border-radius: 4px;
+  }
+  .primary {
+    background: var(--paper);
+    color: var(--forest);
+  }
+  .secondary {
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: var(--paper);
+  }
+  .pagination {
+    margin-top: 24px;
+  }
+  .pagination span {
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    background: var(--paper-dark);
+  }
+  @media (max-width: 900px) {
+    .hero,
+    .category-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 720px) {
+    .mast__nav {
+      display: none;
+    }
+    .mast__burger,
+    .mast__mobile-cta {
+      display: inline-flex !important;
+    }
+    .mast__inner {
+      align-items: center;
+      gap: 10px;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+    .mast__brand {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+    .mast__brand-link {
+      gap: 2px;
+    }
+    .mast__title {
+      font-size: 15px;
+    }
+    .mast__tag {
+      font-size: 11px;
+      line-height: 1.25;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .mast__mobile-cta {
+      min-height: 40px;
+      padding: 9px 14px;
+      white-space: nowrap;
+    }
+    .cta-strip {
+      flex-direction: column;
+      align-items: start;
+    }
+  }
+{{ end }}
+
+{{ define "main" }}
+  {{ $page := site.Data.pages.blog }}
+  {{ $articles := .RegularPages.ByDate.Reverse }}
+  {{ $paginator := .Paginate $articles 7 }}
+  {{ $navLinks := where $page.masthead.nav "class" "mast__nav-link" }}
+  {{ $ctaLinks := where $page.masthead.nav "class" "pill-link" }}
+  <header class="mast">
+    <div class="mast__inner">
+      <details class="mast__burger">
+        <summary class="mast__burger-toggle" aria-label="Open menu">
+          <span class="mast__burger-icon"><span></span></span>
+        </summary>
+        <div class="mast__burger-panel">
+          {{ range $navLinks }}
+            <a class="mast__burger-link" href="{{ .href }}">{{ .label }}</a>
+          {{ end }}
+        </div>
+      </details>
+      <div class="mast__brand">
+        <a class="mast__brand-link" href="/">
+          <p class="mast__title">{{ $page.masthead.title }}</p>
+          <p class="mast__tag">{{ $page.masthead.tagline }}</p>
+        </a>
+      </div>
+      <nav class="mast__nav" aria-label="Navigasi blog">
+        {{ range $page.masthead.nav }}
+          <a class="{{ .class }}" href="{{ .href }}">{{ .label }}</a>
+        {{ end }}
+      </nav>
+      {{ range $ctaLinks }}
+        <a class="{{ .class }} mast__mobile-cta" href="{{ .href }}">{{ .label }}</a>
+      {{ end }}
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <div>
+        <div class="hero__kicker">
+          <span class="eyebrow" style="color:inherit;">{{ $page.hero.kicker }}</span>
+        </div>
+        <h1 class="hero__title">{{ $page.hero.title }}</h1>
+        <p class="hero__lead">{{ $page.hero.lead }}</p>
+        <p class="hero__body">{{ $page.hero.body }}</p>
+      </div>
+
+      <aside class="hero__aside" aria-label="Ringkasan editorial">
+        {{ range $page.editorial_aside }}
+          <div class="aside-card{{ if .dark }} aside-card--dark{{ end }}">
+            <p class="label"{{ if .dark }} style="color:rgba(255,255,255,0.72);"{{ end }}>{{ .label }}</p>
+            <p class="aside-card__text"{{ if .dark }} style="color:rgba(255,255,255,0.88);"{{ end }}>{{ .text }}</p>
+          </div>
+        {{ end }}
+      </aside>
+    </section>
+
+    <div class="content-layout">
+      <div class="panel">
+        <section id="kategori" class="panel__block panel__block--primary">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">{{ $page.category_section.eyebrow }}</p>
+              <h2 class="section-title">{{ $page.category_section.title }}</h2>
+            </div>
+          </div>
+          <p class="section-copy">{{ $page.category_section.copy }}</p>
+          <div class="category-grid" style="margin-top:16px;">
+            {{ range $page.category_section.cards }}
+              <article class="category-card">
+                <p class="label">{{ .label }}</p>
+                <h3>{{ .title }}</h3>
+                <p class="category-card__copy">{{ .copy }}</p>
+              </article>
+            {{ end }}
+          </div>
+        </section>
+
+        <section id="artikel" class="panel__block">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">{{ $page.articles_section.eyebrow }}</p>
+              <h2 class="section-title">{{ $page.articles_section.title }}</h2>
+            </div>
+          </div>
+          <p class="section-copy">{{ $page.articles_section.copy }}</p>
+
+          <div class="article-grid" style="margin-top:16px;">
+            {{ range $paginator.Pages }}
+              <article class="article-card">
+                <div class="article-card__top">
+                  <span class="category-chip">{{ .Params.blog_card.category_label }}</span>
+                  <div class="article-card__meta">
+                    <span class="meta-chip">{{ .Params.read_time }}</span>
+                    <span class="meta-chip">{{ .Params.date_display }}</span>
+                  </div>
+                </div>
+                <h3 class="article-card__title">
+                  <a href="{{ .RelPermalink }}">{{ .Params.blog_card.title }}</a>
+                </h3>
+                <p class="article-card__summary">{{ .Params.blog_card.summary }}</p>
+                <div class="article-card__footer">
+                  <p class="article-card__signal">{{ .Params.blog_card.focus_signal }}</p>
+                  <a class="article-card__cta" href="{{ .RelPermalink }}" aria-label="Baca artikel {{ .Title }}">→</a>
+                </div>
+              </article>
+            {{ else }}
+              <article class="article-card">
+                <p class="article-card__summary">{{ $page.articles_section.empty_state }}</p>
+              </article>
+            {{ end }}
+          </div>
+
+          {{ if gt $paginator.TotalPages 1 }}
+            <nav class="pagination" aria-label="Pagination blog">
+              {{ if $paginator.HasPrev }}
+                <a href="{{ $paginator.Prev.URL }}">Artikel lebih baru</a>
+              {{ end }}
+              <span>Halaman {{ $paginator.PageNumber }} dari {{ $paginator.TotalPages }}</span>
+              {{ if $paginator.HasNext }}
+                <a href="{{ $paginator.Next.URL }}">Artikel lebih lama</a>
+              {{ end }}
+            </nav>
+          {{ end }}
+        </section>
+
+        <section id="arah" class="cta-strip" aria-label="Arah produk">
+          <p class="cta-strip__copy">{{ $page.cta_strip.copy }}</p>
+          <div class="cta-strip__actions">
+            {{ range $page.cta_strip.actions }}
+              <a class="{{ .class }}" href="{{ .href }}">{{ .label }}</a>
+            {{ end }}
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+{{ end }}
